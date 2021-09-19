@@ -173,6 +173,6 @@ app.controller('resultsController', function ($scope, $http, $location, shareIma
     console.log(editableInput.innerHTML);
     let apiEndpoint = "http://localhost:8000/hootsuite/schedulePost/";
     $http.post(apiEndpoint, {text: editableInput.innerHTML}, {
-      withCredentials: false}).then(() => { console.log('success! posted tweet!'); $scope.loader=false; $location.path('/').replace();}, () => { console.error("error!");});
+      withCredentials: false}).then(() => { console.log('success! posted tweet!'); $scope.loader=false; $location.path('/premium').replace();}, () => { console.error("error!");});
   }
 })

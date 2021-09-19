@@ -327,13 +327,13 @@ html {
     width: 100%;
     height: var(--header-height-m);
     transition: all 300ms ease-in-out;
-    background-color: var(--clr-white);
+    background-color: white;
   }
 
   @media screen and (min-width: 40em) {
     .header {
       height: var(--header-height-d);
-      background-color: transparent;
+      background-color: var(--clr-body);
     }
   }
 

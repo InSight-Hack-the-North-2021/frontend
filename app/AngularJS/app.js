@@ -4,7 +4,7 @@ app.config(function ($routeProvider) {
     .when('/', {
       controller: 'mainController',
       templateUrl: './AngularJS/Views/introView.html?v=8',
-      css: './Styles/introStyle.css?v=8'
+      css: './Styles/introStyle.css?v=9'
     })
     .when('/upload', {
       controller: 'mainController',
