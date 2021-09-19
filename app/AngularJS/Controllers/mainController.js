@@ -1,6 +1,6 @@
 //mainController.js everything being debugged not final
-app.controller('mainController', function($scope, $http, $route, $location, shareImage, apiData) {
-  const API_ENDPOINT = 'https://makemecool.uc.r.appspot.com/image/score';
+app.controller('mainController', function($scope, $http, $route, $location, shareImage, apiData, premiumData) {
+  const API_ENDPOINT = 'http://localhost:8000/image/score';
   $scope.loader = false;
 
   let openResultsPage = () => {
@@ -19,6 +19,6 @@ app.controller('mainController', function($scope, $http, $route, $location, shar
     withCredentials: false,
     headers: {'Content-Type': undefined},
     transformRequest: angular.indentity
-  }).then((data)=>{apiData.setjsonData(data.data);$scope.loader=false;openResultsPage();},(err)=>{console.error(err);});
+  }).then((data)=>{apiData.setjsonData(data.data);$scope.loader=false;openResultsPage();premiumData.setjsonData({premium: false})},(err)=>{console.error(err);});
   };
 })

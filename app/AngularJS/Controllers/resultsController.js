@@ -1,5 +1,5 @@
 //mainController.js everything being debugged not final
-app.controller('resultsController', function ($scope, $http, $location, shareImage, apiData) {
+app.controller('resultsController', function ($scope, $http, $location, shareImage, apiData, premiumData) {
   $scope.description = ""
   let data = {}
   let recommendation = {};
@@ -19,22 +19,32 @@ app.controller('resultsController', function ($scope, $http, $location, shareIma
     if(!arr){
       arr = [];
     }
-    let reducedMap = arr.map((element, index) => { if (index < 5) { return element; } });
+    console.log(arr);
     let i = 0;
-    for (x in reducedMap) {
-      if (reducedMap[x]) {
+    for (x in arr) {
+      if (arr[x]) {
         i++;
       }
     }
-    reducedMap.length = i;
-    nextHashtag = i;
+    let reducedMap = [...arr];
+    nextHashtag = arr.length > 5 ? 5 : i;
+    reducedMap.length = nextHashtag;
     return reducedMap;
   }
   let cleanRecommendation = (obj) => {
+    if(!obj){
+      obj = {};
+    }
     let arr = []
     Object.entries(obj).forEach(([key, value]) => {
       if (value) {
         let elem = [];
+        if(key == 'msg'){
+          key = 'style';
+        }
+        if(key == 'blurr'){
+          key = 'blurry';
+        }
         elem.push(key);
         elem.push(value);
         arr.push(elem);
@@ -134,21 +144,24 @@ app.controller('resultsController', function ($scope, $http, $location, shareIma
       validated(element);
       placeholder.style.display = "none";
     }
-
-    $scope.imgsrc = shareImage.getImgSrc();
-    data = apiData.getjsonData();
+    var premiumObj = premiumData.getjsonData();
+    console.log(premiumObj)
+    if(premiumObj.premium){data = premiumObj; $scope.imgsrc=data.image_url;}
+    else{$scope.imgsrc = shareImage.getImgSrc();data = apiData.getjsonData();}
     recommendation = data.recommendation;
-    console.log(data);
     $scope.recommendations = cleanRecommendation(recommendation);
     labels = data.labels;
+    labels = labels.map((value)=>{return value.replaceAll(' ', '_');});
     $scope.hashtags = cleanLabels(labels);
     $scope.fscore = data["Final score"];
     drawGauge('finalScore', $scope.fscore);
+
   };
   $scope.useHashtag = (hashtag) => {
     hashtag = hashtag.replaceAll(' ', '_');
     editableInput.innerHTML += " #";
     editableInput.innerHTML += hashtag;
+    console.log($scope.hashtags.indexOf(hashtag));
     $scope.hashtags.splice($scope.hashtags.indexOf(hashtag), 1);
     if (labels[nextHashtag]) {
       $scope.hashtags.push(labels[nextHashtag]);
@@ -158,8 +171,7 @@ app.controller('resultsController', function ($scope, $http, $location, shareIma
   $scope.sendPost = () => {
     $scope.loader = true;
     console.log(editableInput.innerHTML);
-    let apiEndpoint = "https://makemecool.uc.r.appspot.com/hootsuite/schedulePost/";
-    console.log(apiEndpoint);
+    let apiEndpoint = "http://localhost:8000/hootsuite/schedulePost/";
     $http.post(apiEndpoint, {text: editableInput.innerHTML}, {
       withCredentials: false}).then(() => { console.log('success! posted tweet!'); $scope.loader=false; $location.path('/').replace();}, () => { console.error("error!");});
   }

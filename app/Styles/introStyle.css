@@ -10,6 +10,16 @@ html {
     margin-left: 50px;
   }
 
+  .leftDiv {
+    margin-left: 20vh;
+    margin-right: 0 auto;
+  }
+
+  .rightDiv {
+    margin-right: 20vh;
+    margin-left: 0 auto;
+  }
+
   :root {
     /* Colors */
     --clr-primary: hsl(235, 81%, 60%);
@@ -826,21 +836,25 @@ html {
   } */
 
   .team__wrapper {
-    display: grid;
+    /* display: grid; */
+    display: flex;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 21.875rem), 1fr));
-    gap: 1.5rem;
+    gap: 6rem;
   }
 
   .team__member {
     position: relative;
     border-radius: 1.25rem;
+    margin-bottom: 6vh;
   }
 
   .member__image {
     width: 100%;
     height: 26.25rem;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: inherit;
+
+
   }
 
   .member__info {

@@ -11,11 +11,6 @@ app.config(function ($routeProvider) {
       templateUrl: './AngularJS/Views/uploadView.html?v=8',
       css: './Styles/uploadStyle.css?v=8'
     })
-    .when('/delete', {
-      controller: 'resultsController',
-      templateUrl: './AngularJS/Views/deleteThisView.html?v=8',
-      css: './Styles/style.css'
-    })
     .when('/ratings', {
       controller: 'resultsController',
       templateUrl: './AngularJS/Views/ratingsView.html',
@@ -24,7 +19,7 @@ app.config(function ($routeProvider) {
     .when('/premium', {
       controller: 'premiumController',
       templateUrl: './AngularJS/Views/premiumView.html',
-      css: "./Styles/premiumStyle.css",
+      css: "./Styles/premiumStyle.css?v=2",
     })
     .otherwise({
       redirectTo: '/'

@@ -1,16 +1,4 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>InSight Premium</title>
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
-</head>
-
-<body>
-
-
-    <div class="top-title">
+  <div class="top-title">
 
         <a href="#"><img id="logoInsight" src="../../assets/insight.png" alt=""></a>
 
@@ -18,7 +6,7 @@
             <div class="title">
                 <h1>You have to get Premium.</h1>
                 <h2>We'll scan your best pictures all at once.</h2>
-                <button ng-click="sendPost()">Try InSight Premium</button>
+                <button ng-click="getPremiumData()">Try InSight Premium</button>
 
 
             </div>
@@ -38,7 +26,7 @@
                     <img src="../../assets/upload.svg" alt="">
                     <h2>Unlimited Uploads</h2>
                     <h3>Enjoy limitless image uploads on InSight.</h3>
-                    
+
                 </div>
             </div>
 
@@ -55,7 +43,7 @@
                     <img src="../../assets/recommendation.svg" alt="">
                     <h2>Personalized Recommendations</h2>
                     <h3>We will design suggestions just for you.</h3>
-                    
+
                 </div>
             </div>
 
@@ -66,8 +54,4 @@
 
 
     </div>
-
-</body>
-
-
-</html>
+    <div class="loading" ng-show="loader">Loading&#8230;</div>
